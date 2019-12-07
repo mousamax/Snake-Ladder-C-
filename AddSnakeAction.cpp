@@ -1,19 +1,18 @@
-#include "AddLadderAction.h"
-
+#include "AddSnakeAction.h"
+#include "Snake.h"
 #include "Input.h"
 #include "Output.h"
-#include "Ladder.h"
 
-AddLadderAction::AddLadderAction(ApplicationManager *pApp) : Action(pApp)
+AddSnakeAction::AddSnakeAction(ApplicationManager *pApp) : Action(pApp)
 {
 	// Initializes the pManager pointer of Action with the passed pointer
 }
 
-AddLadderAction::~AddLadderAction()
+AddSnakeAction::~AddSnakeAction()
 {
 }
 
-void AddLadderAction::ReadActionParameters() 
+void AddSnakeAction::ReadActionParameters() 
 {	
 	// Get a Pointer to the Input / Output Interfaces
 	Grid* pGrid = pManager->GetGrid();
@@ -21,21 +20,19 @@ void AddLadderAction::ReadActionParameters()
 	Input* pIn = pGrid->GetInput();
 
 	// Read the startPos parameter
-	pOut->PrintMessage("New Ladder: Click on its Start Cell ...");
+	pOut->PrintMessage("New Snake: Click on its Start Cell ...");
 	startPos = pIn->GetCellClicked();
 
 	// Read the endPos parameter
-	pOut->PrintMessage("New Ladder: Click on its End Cell ...");
+	pOut->PrintMessage("New Snake: Click on its End Cell ...");
 	endPos = pIn->GetCellClicked();
 
     
-
 	///TODO: Make the needed validations on the read parameters
-	if(startPos.HCell() != endPos.HCell() ||  startPos.GetCellNum() > endPos.GetCellNum() ){
+	if( (startPos.HCell() != endPos.HCell()) ||  (startPos.GetCellNum() < endPos.GetCellNum() )){
 		pOut->ClearStatusBar();
 		return;
 	}
-	
 
 	// Clear messages
 	pOut->ClearStatusBar();
@@ -43,19 +40,21 @@ void AddLadderAction::ReadActionParameters()
 
 
 // Execute the action
-void AddLadderAction::Execute() 
+void AddSnakeAction::Execute() 
 {
+	
 	// The first line of any Action Execution is to read its parameter first 
 	// and hence initializes its data members
 	ReadActionParameters();
 
-	// Create a Ladder object with the parameters read from the user
-	Ladder * pLadder = new Ladder(startPos, endPos);
+	// Create a Snake object with the parameters read from the user
+	Snake * psnake = new Snake(startPos,endPos);
 
 	Grid * pGrid = pManager->GetGrid(); // We get a pointer to the Grid from the ApplicationManager
-
+	
 	// Add the card object to the GameObject of its Cell:
-	bool added = pGrid->AddObjectToCell(pLadder);
+
+	bool added = pGrid->AddObjectToCell(psnake);
 
 	// if the GameObject cannot be added
 	if (! added)
