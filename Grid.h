@@ -55,7 +55,7 @@ public:
 
 	void SetClipboard(Card * card);  // A setter to be used in copy/cut (in order NOT to break class responsibilities)
 	Card * GetClipboard() const;	 // A getter to be used in paste (in order NOT to break class responsibilities)
-
+	
 	void SetEndGame(bool endGame);	 // A setter for endGame data member
 	bool GetEndGame() const;		 // A getter for endGame data member
 
@@ -78,6 +78,11 @@ public:
 
 	void PrintErrorMessage(string msg); // Prints an error message on statusbar, Waits for mouse click then clears statusbar
 									    // We added this function once here because it is used many times by other classes
+
+	// Overlapping tst
+
+	bool IsOverlapping(GameObject * newObj)const;
+
 
 	~Grid(); // A destructor for any needed deallcations
 };
