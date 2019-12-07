@@ -4,6 +4,8 @@
 #include "AddLadderAction.h"
 #include "AddCardAction.h"
 #include "RollDiceAction.h"
+#include "InputDiceValue.h"
+#include "NewGame.h"
 
 ///TODO: Add #include for all action types
 
@@ -85,6 +87,13 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 
 		///TODO: Add a case for EACH Action type in the Design mode or Play mode
 
+	case INPUT_DICE_VALUE:
+		// create an object of RollDiceAction here
+		pAct = new InputDiceValue(this);
+		break;
+		case NEW_GAME:
+			pAct = new NewGame(this);
+			break;
 
 
 	case STATUS:	// a click on the status bar ==> no action
