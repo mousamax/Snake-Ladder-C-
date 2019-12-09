@@ -383,6 +383,7 @@ void Output::DrawPlayer(const CellPosition & cellPos, int playerNum, color playe
 		x += radius + 2 + radius; // because playerNum 1 and 3 are drawn in the second column of circles
 
 	///TODO: Draw the player circle in center(x,y) and filled with the playerColor passed to the function
+	pWind->SetPen(playerColor);
 	pWind->SetBrush(playerColor);
 	pWind->DrawCircle(x,y,radius,FILLED);
 
