@@ -2,7 +2,7 @@
 
 #include "Action.h"
 
-class InputDiceValue: Action
+class InputDiceValue:public Action
 {
 	int diceValue;
 public:
