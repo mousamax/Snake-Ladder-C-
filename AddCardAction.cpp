@@ -3,7 +3,19 @@
 #include "Input.h"
 #include "Output.h"
 #include "CardOne.h"
+#include "CardTwo.h"
+#include "CardThree.h"
+#include "CardFour.h"
+#include "CardFive.h"
+#include "CardSix.h"
+#include "CardSeven.h"
+#include "CardEight.h"
+#include "CardNine.h"
 #include "CardTen.h"
+#include "CardEleven.h"
+#include "CardTwelve.h"
+#include "CardThirteen.h"
+#include "CardFourteen.h"
 
 AddCardAction::AddCardAction(ApplicationManager *pApp) : Action(pApp)
 {
@@ -23,8 +35,8 @@ void AddCardAction::ReadActionParameters()
 	// == Here are some guideline steps (numbered below) to implement this function ==
 
 	// 1- Get a Pointer to the Input / Output Interfaces
-	ApplicationManager *pApp;
-	Grid *pGrid=pApp->GetGrid();
+	
+	Grid *pGrid=pManager->GetGrid();
 	Input *pIn=pGrid->GetInput();
 	Output *pOut=pGrid->GetOutput();
 	
@@ -113,8 +125,8 @@ void AddCardAction::Execute()
 	{
 		// A- We get a pointer to the Grid from the ApplicationManager
 		
-		ApplicationManager *pApp;
-		Grid *pGrid = pApp->GetGrid();
+		
+		Grid *pGrid = pManager->GetGrid();
 		
 		// B- Make the "pCard" reads its card parameters: ReadCardParameters(), It is virtual and depends on the card type
 		pCard->ReadCardParameters(pGrid);
