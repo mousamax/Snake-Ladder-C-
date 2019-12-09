@@ -33,13 +33,17 @@ void NewGame::Execute()
 		// -- If not ended, do the following --:
 
 		// 3- Get the "current" player from pGrid
-		Player* pPlayer = pGrid->GetCurrentPlayer();
-		// 4- Move the currentPlayer using function Move of class player
-		Cell cell(0, 8);
-		pPlayer->SetCell(&cell);
-		pPlayer->SetWallet(0);
-		// 5- Advance the current player number of pGrid
-		pGrid->AdvanceCurrentPlayer();
+		for (int i = 0; i < 4; i++)
+		{
+			Player* pPlayer = pGrid->GetCurrentPlayer();
+			// 4- Move the currentPlayer using function Move of class player
+			Cell cell(0, 8);
+			pPlayer->SetCell(&cell);
+			pPlayer->SetWallet(0);
+			// 5- Advance the current player number of pGrid
+			pGrid->AdvanceCurrentPlayer();
+		}
+		
 		// NOTE: the above guidelines are the main ones but not a complete set (You may need to add more steps).
 	}
 }
