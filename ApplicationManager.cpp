@@ -2,8 +2,11 @@
 
 #include "Grid.h"
 #include "AddLadderAction.h"
+#include "AddSnakeAction.h"
 #include "AddCardAction.h"
 #include "RollDiceAction.h"
+#include "InputDiceValue.h"
+#include "NewGame.h"
 
 ///TODO: Add #include for all action types
 
@@ -26,7 +29,7 @@ ApplicationManager::~ApplicationManager()
 //								Interface Management Functions						//
 //==================================================================================//
 
-Grid * ApplicationManager::GetGrid() const
+Grid* ApplicationManager::GetGrid() const
 {
 	return pGrid;
 }
@@ -49,7 +52,7 @@ ActionType ApplicationManager::GetUserAction() const
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Creates an action and executes it
-void ApplicationManager::ExecuteAction(ActionType ActType) 
+void ApplicationManager::ExecuteAction(ActionType ActType)
 {
 	Action* pAct = NULL;
 
@@ -58,6 +61,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	{
 	case ADD_LADDER:
 		pAct = new AddLadderAction(this);
+		break;
+
+	case ADD_SNAKE:
+		pAct = new AddSnakeAction(this);
 		break;
 
 	case ADD_CARD:
@@ -81,10 +88,17 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pOut->CreateDesignModeToolBar(); // temporary till you made its action class (CHANGE THIS LATTER)
 		break;
 
-		
+
 
 		///TODO: Add a case for EACH Action type in the Design mode or Play mode
 
+	case INPUT_DICE_VALUE:
+		// create an object of RollDiceAction here
+		pAct = new InputDiceValue(this);
+		break;
+	case NEW_GAME:
+		pAct = new NewGame(this);
+		break;
 
 
 	case STATUS:	// a click on the status bar ==> no action
@@ -92,7 +106,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	}
 
 	// Execute the created action
-	if(pAct != NULL)
+	if (pAct != NULL)
 	{
 		pAct->Execute(); // Execute
 		delete pAct;	 // Action is not needed any more after executing ==> delete it

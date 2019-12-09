@@ -41,7 +41,8 @@ public:
 	bool AddObjectToCell(GameObject * pNewObject);		 // Adds a GameObject to the Cell of its "position" data member
 	                                                     // only if the Cell does NOT already contain an object, 
 	                                                     // otherwise return false and don't add
-
+	int get_currplayernum();
+	void set_currplayernum(int playernum);
 	void RemoveObjectFromCell(const CellPosition & pos); // Removes the GameObject of the Cell of the passed "position"
 
 	void UpdatePlayerCell(Player * player, const CellPosition & newPosition); // Update the player's pCell with the CellList's Cell pointer of the "newPosition",

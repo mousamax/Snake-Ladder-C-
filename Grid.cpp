@@ -56,6 +56,16 @@ bool Grid::AddObjectToCell(GameObject * pNewObject)  // think if any validation 
 	return false; // if not a valid position
 }
 
+int Grid::get_currplayernum()
+{
+	return currPlayerNumber;
+}
+
+void Grid::set_currplayernum(int playernum)
+{
+	currPlayerNumber = playernum;
+}
+
 void Grid::RemoveObjectFromCell(const CellPosition & pos)
 {
 	if (pos.IsValidCell()) // Check if valid position
@@ -74,7 +84,6 @@ void Grid::UpdatePlayerCell(Player * player, const CellPosition & newPosition)
 	// Set the player's CELL with the new position
 	Cell * newCell = CellList[newPosition.VCell()][newPosition.HCell()];
 	player->SetCell(newCell);	
-
 	// Draw the player's circle on the new cell position
 	player->Draw(pOut);
 }
