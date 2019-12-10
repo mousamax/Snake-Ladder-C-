@@ -6,10 +6,10 @@
 #include "Card.h"
 #include "Player.h"
 
-Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pIn, pOut
+Grid::Grid(Input* pIn, Output* pOut) : pIn(pIn), pOut(pOut) // Initializing pIn, pOut
 {
 	// Allocate the Cell Objects of the CellList
-	for (int i = NumVerticalCells-1; i >= 0 ; i--) // to allocate cells from bottom up
+	for (int i = NumVerticalCells - 1; i >= 0; i--) // to allocate cells from bottom up
 	{
 		for (int j = 0; j < NumHorizontalCells; j++) // to allocate cells from left to right
 		{
@@ -18,9 +18,9 @@ Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pI
 	}
 
 	// Allocate thePlayer Objects of the PlayerList
-	for (int i = 0; i < MaxPlayerCount; i++) 
+	for (int i = 0; i < MaxPlayerCount; i++)
 	{
-		PlayerList[i] = new Player(CellList[NumVerticalCells-1][0], i); // first cell
+		PlayerList[i] = new Player(CellList[NumVerticalCells - 1][0], i); // first cell
 		PlayerList[i]->Draw(pOut); // initially draw players in the first cell
 	}
 
@@ -38,15 +38,15 @@ Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pI
 // ========= Adding or Removing GameObjects to Cells =========
 
 
-bool Grid::AddObjectToCell(GameObject * pNewObject)  // think if any validation is needed
+bool Grid::AddObjectToCell(GameObject* pNewObject)  // think if any validation is needed
 {
 	// Get the cell position of pNewObject
 	CellPosition pos = pNewObject->GetPosition();
 	if (pos.IsValidCell()) // Check if valid position
 	{
 		// Get the previous GameObject of the Cell
-		GameObject * pPrevObject = CellList[pos.VCell()][pos.HCell()]->GetGameObject();
-		if( pPrevObject)  // the cell already contains a game object
+		GameObject* pPrevObject = CellList[pos.VCell()][pos.HCell()]->GetGameObject();
+		if (pPrevObject)  // the cell already contains a game object
 			return false; // do NOT add and return false
 
 		// Set the game object of the Cell with the new game object
@@ -66,7 +66,7 @@ void Grid::set_currplayernum(int playernum)
 	currPlayerNumber = playernum;
 }
 
-void Grid::RemoveObjectFromCell(const CellPosition & pos)
+void Grid::RemoveObjectFromCell(const CellPosition& pos)
 {
 	if (pos.IsValidCell()) // Check if valid position
 	{
@@ -76,14 +76,14 @@ void Grid::RemoveObjectFromCell(const CellPosition & pos)
 	}
 }
 
-void Grid::UpdatePlayerCell(Player * player, const CellPosition & newPosition)
+void Grid::UpdatePlayerCell(Player* player, const CellPosition& newPosition)
 {
 	// Clear the player's circle from the old cell position
 	player->ClearDrawing(pOut);
 
 	// Set the player's CELL with the new position
-	Cell * newCell = CellList[newPosition.VCell()][newPosition.HCell()];
-	player->SetCell(newCell);	
+	Cell* newCell = CellList[newPosition.VCell()][newPosition.HCell()];
+	player->SetCell(newCell);
 	// Draw the player's circle on the new cell position
 	player->Draw(pOut);
 }
@@ -92,23 +92,23 @@ void Grid::UpdatePlayerCell(Player * player, const CellPosition & newPosition)
 // ========= Setters and Getters Functions =========
 
 
-Input * Grid::GetInput() const
+Input* Grid::GetInput() const
 {
 	return pIn;
 }
 
-Output * Grid::GetOutput() const
+Output* Grid::GetOutput() const
 {
 	return pOut;
 }
 
-void Grid::SetClipboard(Card * pCard) // to be used in copy/cut
+void Grid::SetClipboard(Card* pCard) // to be used in copy/cut
 {
 	// you may update slightly in implementation if you want (but without breaking responsibilities)
 	Clipboard = pCard;
 }
 
-Card * Grid::GetClipboard() const // to be used in paste
+Card* Grid::GetClipboard() const // to be used in paste
 {
 	return Clipboard;
 }
@@ -131,14 +131,14 @@ void Grid::AdvanceCurrentPlayer()
 // ========= Other Getters =========
 
 
-Player * Grid::GetCurrentPlayer() const
+Player* Grid::GetCurrentPlayer() const
 {
 	return PlayerList[currPlayerNumber];
 }
 
-Ladder * Grid::GetNextLadder(const CellPosition & position)
+Ladder* Grid::GetNextLadder(const CellPosition& position)
 {
-	
+
 	int startH = position.HCell(); // represents the start hCell in the current row to search for the ladder in
 	for (int i = position.VCell(); i >= 0; i--) // searching from position.vCell and ABOVE
 	{
@@ -147,7 +147,7 @@ Ladder * Grid::GetNextLadder(const CellPosition & position)
 
 
 			///TODO: Check if CellList[i][j] has a ladder, if yes return it
-			
+
 
 		}
 		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
@@ -164,7 +164,7 @@ void Grid::UpdateInterface() const
 	if (UI.InterfaceMode == MODE_DESIGN)
 	{
 		// 1- Draw cells with or without cards 
-		for (int i = NumVerticalCells-1; i >= 0 ; i--) // bottom up
+		for (int i = NumVerticalCells - 1; i >= 0; i--) // bottom up
 		{
 			for (int j = 0; j < NumHorizontalCells; j++) // left to right
 			{
@@ -173,7 +173,7 @@ void Grid::UpdateInterface() const
 		}
 
 		// 2- Draw other cell objects (ladders, snakes)
-		for (int i = NumVerticalCells-1; i >= 0 ; i--) // bottom up
+		for (int i = NumVerticalCells - 1; i >= 0; i--) // bottom up
 		{
 			for (int j = 0; j < NumHorizontalCells; j++) // left to right
 			{
@@ -194,7 +194,7 @@ void Grid::UpdateInterface() const
 		for (int i = 0; i < MaxPlayerCount; i++)
 		{
 			PlayerList[i]->AppendPlayerInfo(playersInfo); // passed by reference
-			if (i < MaxPlayerCount-1) // except the last player
+			if (i < MaxPlayerCount - 1) // except the last player
 				playersInfo += ", ";
 		}
 		playersInfo += " | Curr = " + to_string(currPlayerNumber);
@@ -215,6 +215,63 @@ void Grid::PrintErrorMessage(string msg)
 	pOut->ClearStatusBar();
 }
 
+void Grid::SaveAll(ofstream& Output, GOType Type) const
+{
+	for (int i = NumVerticalCells - 1; i >= 0; i--) // bottom up
+	{
+		for (int j = 0; j < NumHorizontalCells; j++) // left to right
+		{
+			GameObject* pGopject = CellList[i][j]->GetGameObject();
+			if (pGopject != NULL)
+				pGopject->Save(Output, Type);
+		}
+	}
+
+}
+
+int Grid::numofladders()
+{
+	int count = 0;
+	for (int i = NumVerticalCells - 1; i >= 0; i--) // bottom up
+	{
+		for (int j = 0; j < NumHorizontalCells; j++) // left to right
+		{
+			Ladder* pLadder = CellList[i][j]->HasLadder();
+			if (pLadder != NULL)
+				count++;
+		}
+	}
+	return count;
+}
+int Grid::numofSnakes()
+{
+	int count = 0;
+	for (int i = NumVerticalCells - 1; i >= 0; i--) // bottom up
+	{
+		for (int j = 0; j < NumHorizontalCells; j++) // left to right
+		{
+			Snake* pSnake = CellList[i][j]->HasSnake();
+			if (pSnake != NULL)
+				count++;
+		}
+	}
+	return count;
+}
+int Grid::numofCards()
+{
+	int count = 0;
+	for (int i = NumVerticalCells - 1; i >= 0; i--) // bottom up
+	{
+		for (int j = 0; j < NumHorizontalCells; j++) // left to right
+		{
+			Card* pCard = CellList[i][j]->HasCard();
+			if (pCard != NULL)
+				count++;
+		}
+	}
+	return count;
+}
+
 
 Grid::~Grid()
 {
@@ -222,16 +279,16 @@ Grid::~Grid()
 	delete pOut;
 
 	// Deallocate the Cell Objects of the CellList
-	for (int i = NumVerticalCells-1; i >= 0 ; i--) 
+	for (int i = NumVerticalCells - 1; i >= 0; i--)
 	{
-		for (int j = 0; j < NumHorizontalCells; j++) 
+		for (int j = 0; j < NumHorizontalCells; j++)
 		{
 			delete CellList[i][j];
 		}
 	}
 
 	// Deallocate the Player Objects of the PlayerList
-	for (int i = 0; i < MaxPlayerCount; i++) 
+	for (int i = 0; i < MaxPlayerCount; i++)
 	{
 		delete PlayerList[i];
 	}

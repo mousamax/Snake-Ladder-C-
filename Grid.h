@@ -2,7 +2,7 @@
 
 #include "UI_Info.h"
 #include "DEFS.h"
-
+#include <fstream>
 #include "Input.h"
 #include "Output.h"
 #include "CellPosition.h"
@@ -79,6 +79,10 @@ public:
 
 	void PrintErrorMessage(string msg); // Prints an error message on statusbar, Waits for mouse click then clears statusbar
 									    // We added this function once here because it is used many times by other classes
+	void SaveAll(ofstream& Output, GOType Type)const ;
+	int numofladders();
+	int numofSnakes();
+	int numofCards();
 
 	~Grid(); // A destructor for any needed deallcations
 };

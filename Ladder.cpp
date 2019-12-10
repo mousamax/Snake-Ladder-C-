@@ -2,7 +2,7 @@
 #include "Player.h"
 #include"Grid.h"
 
-Ladder::Ladder(const CellPosition& startCellPos, const CellPosition& endCellPos) : GameObject(startCellPos)
+Ladder::Ladder(const CellPosition& startCellPos, const CellPosition& endCellPos) : GameObject(startCellPos), ObjType(ladder)
 {
 	if (startCellPos.HCell() != endCellPos.HCell() || startCellPos.GetCellNum() > endCellPos.GetCellNum())
 		return;
@@ -60,6 +60,22 @@ void Ladder::Apply(Grid* pGrid, Player* pPlayer)
 	pGrid->UpdatePlayerCell(pPlayer, c2);
 	//    Review the "pGrid" functions and decide which function can be used for that
 
+}
+
+void Ladder::Save(ofstream& OutFile, GOType Type)
+{
+	if (Type == ObjType) 
+	{
+		CellPosition temp;
+		temp = GetPosition();
+		OutFile << temp.GetCellNum() << "\t" << endCellPos.GetCellNum() << endl;
+
+	}
+	else { return; }
+}
+
+void Ladder::Load(ifstream& Infile, GOType Type)
+{
 }
 
 CellPosition Ladder::GetEndPosition() const

@@ -10,6 +10,7 @@ class Card : public GameObject
 {
 protected:
 	int cardNumber; // an integer representing the card number
+	const GOType ObjType;
 
 public:
 	Card(const CellPosition & pos); // A Constructor for card that takes the cell position of it
@@ -26,6 +27,8 @@ public:
 	virtual void Apply(Grid* pGrid, Player* pPlayer);  // It applies the effect of the Card Type on the passed player
 	                                                   // It is a virtual function (implementation depends on Card Type)
 
+	virtual void Save(ofstream& OutFile, GOType Type);	// Saves the GameObject parameters to the file
+	virtual void Load(ifstream& Infile, GOType Type);
 	virtual ~Card(); // A Virtual Destructor
 };
 

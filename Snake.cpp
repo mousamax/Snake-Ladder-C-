@@ -2,7 +2,7 @@
 #include "Player.h"
 #include"Grid.h"
 
-Snake::Snake(const CellPosition& startCellPos, const CellPosition& endCellPos) : GameObject(startCellPos)
+Snake::Snake(const CellPosition& startCellPos, const CellPosition& endCellPos) : GameObject(startCellPos),ObjType(snake)
 {
 	if (startCellPos.HCell() != endCellPos.HCell() || startCellPos.GetCellNum() < endCellPos.GetCellNum())
 		return;
@@ -40,6 +40,22 @@ void Snake::Apply(Grid* pGrid, Player* pPlayer)
 CellPosition Snake::GetEndPosition() const
 {
 	return endCellPos;
+}
+
+void Snake::Save(ofstream& OutFile, GOType Type)
+{
+	if (Type == ObjType)
+	{
+		CellPosition temp;
+		temp = GetPosition();
+		OutFile << temp.GetCellNum() << "\t" << endCellPos.GetCellNum() << endl;
+
+	}
+	else { return; }
+}
+
+void Snake::Load(ifstream& Infile, GOType Type)
+{
 }
 
 Snake::~Snake()

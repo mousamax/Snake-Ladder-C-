@@ -1,7 +1,7 @@
 #include "Card.h"
 
 
-Card::Card(const CellPosition& pos) : GameObject(pos) // sets the cell position of the GameObject
+Card::Card(const CellPosition& pos) : GameObject(pos), ObjType(card) // sets the cell position of the GameObject
 {
 }
 
@@ -35,6 +35,24 @@ void Card::Apply(Grid* pGrid, Player* pPlayer)
 	// "If a player reaches a card of any other type", the following message should be printed then wait mouse click
 
 	pGrid->PrintErrorMessage("You have reached card " + to_string(cardNumber) + ". Click to continue ...");
+}
+
+void Card::Save(ofstream& OutFile, GOType Type)
+{
+		if (Type == ObjType)
+		{
+			CellPosition temp;
+			temp = GetPosition();
+			OutFile <<cardNumber<<"\t"<< temp.GetCellNum() <<"\t" << endl; //there is still a missing implementation
+
+		}
+		else { return; }
+	
+
+}
+
+void Card::Load(ifstream& Infile, GOType Type)
+{
 }
 
 Card::~Card()
