@@ -4,6 +4,7 @@ CardEleven::CardEleven(const CellPosition &pos)
 	 :Card(pos)
 {
 	cardNumber=11;
+		 Isbought=false;
 }
 
 void CardEleven::ReadCardParameters(Grid *pGrid)
