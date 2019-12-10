@@ -3,6 +3,7 @@ CardTwelve::CardTwelve(const CellPosition &pos)
 	 :Card(pos)
 {
 	cardNumber=12;
+		 Isbought=false;
 }
 
 void CardTwelve::ReadCardParameters(Grid *pGrid)
