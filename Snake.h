@@ -1,6 +1,8 @@
+
 #pragma once
 #include"GameObject.h"
-class Ladder :	public GameObject // inherited from GameObject
+
+class Snake :	public GameObject // inherited from GameObject
 {
 	// Note: the "position" data member inherited from the GameObject class is used as the ladder's "Start Cell Position"
 	
@@ -8,16 +10,17 @@ class Ladder :	public GameObject // inherited from GameObject
 
 public:
 
-	Ladder(const CellPosition & startCellPos, const CellPosition & endCellPos); // A constructor for initialization
+	Snake(const CellPosition & startCellPos, const CellPosition & endCellPos); // A constructor for initialization
 
 	virtual void Draw(Output* pOut) const; // Draws a ladder from its start cell to its end cell
 
 	virtual void Apply(Grid* pGrid, Player* pPlayer); // Applys the effect of the ladder by moving player to ladder's end cell
 
 	CellPosition GetEndPosition() const; // A getter for the endCellPos data member
-
+	
 	bool IsOverlapping(GameObject * newObj)const;
 
-	virtual ~Ladder(); // Virtual destructor
+	virtual ~Snake(); // Virtual destructor
 };
+
 

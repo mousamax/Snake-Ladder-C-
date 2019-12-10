@@ -30,8 +30,8 @@ void CardSix::Apply(Grid* pGrid, Player* pPlayer)
 
 	
 	int justrolled=pPlayer->GetjustRolledDiceNum();
-
-	pPlayer->Move(pGrid,-justrolled); // negative just rolled....
-
+	
+	pPlayer->Move(pGrid,-pPlayer->GetjustRolledDiceNum());	// negative just rolled....
+	
 
 }

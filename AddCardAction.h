@@ -2,12 +2,11 @@
 
 #include "Action.h"
 
-class AddCardAction : public Action
+class AddCardAction : virtual public Action
 {
 	// [Action Parameters]
 	int cardNumber;            // 1- the card number
 	CellPosition cardPosition; // 2- cell position of the card
-
 	// Note: These parameters should be read in ReadActionParameters()
 	
 public:

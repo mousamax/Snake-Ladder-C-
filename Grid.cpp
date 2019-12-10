@@ -1,10 +1,11 @@
 #include "Grid.h"
-
 #include "Cell.h"
 #include "GameObject.h"
 #include "Ladder.h"
 #include "Card.h"
 #include "Player.h"
+#include"Snake.h"
+
 
 Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pIn, pOut
 {
@@ -40,6 +41,11 @@ Grid::Grid(Input * pIn, Output * pOut) : pIn(pIn), pOut(pOut) // Initializing pI
 
 bool Grid::AddObjectToCell(GameObject * pNewObject)  // think if any validation is needed
 {
+	bool z=0;
+	z=this->IsOverlapping(pNewObject);
+	if(z==1)
+		return false;
+	
 	// Get the cell position of pNewObject
 	CellPosition pos = pNewObject->GetPosition();
 	if (pos.IsValidCell()) // Check if valid position
@@ -81,6 +87,17 @@ void Grid::UpdatePlayerCell(Player * player, const CellPosition & newPosition)
 
 
 // ========= Setters and Getters Functions =========
+
+GameObject* Grid::getgameobject(CellPosition c2)const{
+	return CellList[c2.VCell()][c2.HCell()]->GetGameObject();
+}
+
+void Grid::setClipboardFlag(int x){
+	ClipboardFlag=x;
+}
+int Grid::getClipboardFlag()const{
+	return ClipboardFlag;
+}
 
 
 Input * Grid::GetInput() const
@@ -136,18 +153,56 @@ Ladder * Grid::GetNextLadder(const CellPosition & position)
 		for (int j = startH; j < NumHorizontalCells; j++) // searching from startH and RIGHT
 		{
 
-
 			///TODO: Check if CellList[i][j] has a ladder, if yes return it
-			
-
+			if (CellList[i][j]->HasLadder())
+				return CellList[i][j]->HasLadder();
 		}
 		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
 	}
 	return NULL; // not found
 }
 
+Snake* Grid::GetNextSnake(const CellPosition & position)
+{
+		int startH = position.HCell(); // represents the start hCell in the current row to search for the ladder in
+	for (int i = position.VCell(); i >= 0; i--) // searching from position.vCell and ABOVE
+	{
+		for (int j = startH; j < NumHorizontalCells; j++) // searching from startH and RIGHT
+		{
+
+			///TODO: Check if CellList[i][j] has a ladder, if yes return it
+			if (CellList[i][j]->HasSnake())
+				return CellList[i][j]->HasSnake();
+		}
+		startH = 0; // because in the next above rows, we will search from the first left cell (hCell = 0) to the right
+	}
+	return NULL; // not found
+
+}
 
 // ========= User Interface Functions =========
+
+bool Grid:: IsOverlapping(GameObject * newObj)const{
+	
+	bool z=0;
+	GameObject* original=NULL;
+	for (int i = NumVerticalCells-1; i >= 0 ; i--) // bottom up
+		{
+			for (int j = 0; j < NumHorizontalCells; j++) // left to right
+			{
+				if(CellList[i][j]->GetGameObject()!=NULL && CellList[i][j]->GetGameObject()!=newObj){
+					original=CellList[i][j]->GetGameObject();
+					z=original->IsOverlapping(newObj);
+					if (z==1){
+					return 1;
+				}
+			}
+			}
+		}
+	return 0;
+}
+
+
 
 
 void Grid::UpdateInterface() const
@@ -207,6 +262,8 @@ void Grid::PrintErrorMessage(string msg)
 }
 
 
+
+
 Grid::~Grid()
 {
 	delete pIn;
@@ -227,3 +284,4 @@ Grid::~Grid()
 		delete PlayerList[i];
 	}
 }
+

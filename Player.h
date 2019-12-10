@@ -14,7 +14,7 @@ class Player
 	int wallet;		       // player's wallet (how many coins he has -- integer)
 	int justRolledDiceNum; // the current dice number which is just rolled by the player
 	int turnCount;         // a counter that starts with 0, is incremented with each dice roll
-	                       // and reset again when reached 3
+	bool Roll;              // and reset again when reached 3
 	                       // it is used to indicate when to move and when to add to your wallet
 	
 public:
@@ -22,7 +22,7 @@ public:
 	Player(Cell * pCell, int playerNum); // Constructor making any needed initializations
 
 	// ====== Setters and Getters ======
-
+	void set_roll(bool roll);
 	void SetCell(Cell * cell);		// A setter for the pCell
 	Cell* GetCell() const;			// A getter for the pCell
 
@@ -32,6 +32,9 @@ public:
 	int GetTurnCount() const;		// A getter for the turnCount
 
 	///TODO: You can add setters and getters for data members here (if needed)
+	void Set_justRolledDiceNum(int dicenum);
+
+	int GetjustRolledDiceNum()const;
 
 	// ====== Drawing Functions ======
 

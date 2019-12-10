@@ -1,3 +1,4 @@
+
 #include "Card.h"
 
 
@@ -15,11 +16,34 @@ int Card::GetCardNumber()
 	return cardNumber;
 }
 
+bool Card::IsOverlapping( GameObject * newObj)const{
+
+	Card* tst=dynamic_cast<Card*>(newObj);
+	if(tst==NULL){
+		return 0;
+	}
+	
+	
+	for (int i = 0; i < 10; i++)
+	{	
+		for (int j = 0; j < 8; j++)
+		{
+		if (this->GetPosition().VCell()==newObj->GetPosition().VCell() && this->GetPosition().HCell()==newObj->GetPosition().HCell() )
+		{
+		return true;
+		}
+		}
+	}
+
+	return false;
+}
+
+
 void Card::Draw(Output* pOut) const
 {
 
+	pOut->DrawCell(position,cardNumber);
 	///TODO: call the appropriate Ouput function that draws a cell containing the "cardNumber" in "position"
-	pOut->DrawCell(position, cardNumber);
 
 }
 

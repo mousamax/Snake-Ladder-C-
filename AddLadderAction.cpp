@@ -28,7 +28,10 @@ void AddLadderAction::ReadActionParameters()
 	pOut->PrintMessage("New Ladder: Click on its End Cell ...");
 	endPos = pIn->GetCellClicked();
 
-    
+    Cell cx(startPos);
+	if (cx.GetGameObject()!=NULL)
+		return;
+
 
 	///TODO: Make the needed validations on the read parameters
 	if(startPos.HCell() != endPos.HCell() ||  startPos.GetCellNum() > endPos.GetCellNum() ){

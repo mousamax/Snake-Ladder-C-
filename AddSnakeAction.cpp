@@ -27,12 +27,16 @@ void AddSnakeAction::ReadActionParameters()
 	pOut->PrintMessage("New Snake: Click on its End Cell ...");
 	endPos = pIn->GetCellClicked();
 
-    
+	
 	///TODO: Make the needed validations on the read parameters
 	if( (startPos.HCell() != endPos.HCell()) ||  (startPos.GetCellNum() < endPos.GetCellNum() )){
 		pOut->ClearStatusBar();
 		return;
 	}
+
+	Cell cx(startPos);
+	if (cx.GetGameObject()!=NULL)
+		return;
 
 	// Clear messages
 	pOut->ClearStatusBar();

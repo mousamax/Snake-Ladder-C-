@@ -5,7 +5,11 @@
 #include "AddCardAction.h"
 #include "RollDiceAction.h"
 #include "AddSnakeAction.h"
-
+#include"CopyCardAction.h"
+#include"CutCardAction.h"
+#include"PasteCardAction.h"
+#include "NewGame.h"
+#include"InputDiceValue.h"
 ///TODO: Add #include for all action types
 
 ApplicationManager::ApplicationManager()
@@ -60,7 +64,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ADD_LADDER:
 		pAct = new AddLadderAction(this);
 		break;
-	
+
 	case ADD_SNAKE:
 		pAct = new AddSnakeAction(this);
 		break;
@@ -68,6 +72,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case ADD_CARD:
 		// create an object of AddCardAction here
 		pAct = new AddCardAction(this);
+		break;
+
+	case Copy:
+		pAct = new CopyCardAction(this);
+		break;
+
+	case Cut:
+		pAct = new CutCardAction(this);
+		break;
+
+	case Paste:
+		pAct = new PasteCardAction(this);
 		break;
 
 	case EXIT:
@@ -89,6 +105,14 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		
 
 		///TODO: Add a case for EACH Action type in the Design mode or Play mode
+
+		case INPUT_DICE_VALUE:
+		// create an object of RollDiceAction here
+		pAct = new InputDiceValue(this);
+		break;
+		case NEW_GAME:
+			pAct = new NewGame(this);
+			break;
 
 
 

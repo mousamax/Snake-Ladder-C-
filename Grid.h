@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include "UI_Info.h"
 #include "DEFS.h"
 
@@ -13,7 +14,7 @@ class GameObject;
 class Ladder;
 class Card;
 class Player;
-
+class Snake;
 class Grid
 {
 	Output * pOut;   // A pointer to the Output object
@@ -28,7 +29,7 @@ class Grid
 							// currPlayerNumber is: from 0 to MaxPlayerCount - 1
 
 	Card * Clipboard;	   // This is used in copy/cut/paste card (should be set in copy/cut and got in paste)
-
+	int ClipboardFlag; //0 for copy ;;;;; 1 for cut
 	bool endGame;	       // A boolean indicating if the Game is ended or not (a player reaches the end cell of the grid or not)
 
 public:
@@ -48,6 +49,7 @@ public:
 	                                                                          // Clears the player's circle from the previous cell
 	    																	  // and  Draws it in the new cell
 
+
 	// ========= Setters and Getters Functions =========
 
 	Input * GetInput() const;	// Gets a Pointer to the Input
@@ -62,11 +64,18 @@ public:
 	void AdvanceCurrentPlayer();     // Increments the currPlayerNum and if reaches MaxPlayerCount reset to 0 (using %)
 
 	///TODO: add any needed setter/getter "EXCEPT" ANY setters or getters of "CellList" or "PlayerList" (Forbidden for class Responsibilities)
+		
+	GameObject* getgameobject(CellPosition c2)const;
+
+	void setClipboardFlag(int);
+	int getClipboardFlag()const;
 
 	// ========= Other Getters =========
 	
 	Player * GetCurrentPlayer() const;	// Gets a Pointer to the Current Player	                                    
 	Ladder * GetNextLadder(const CellPosition & position);  // Gets a Pointer to the first Ladder after the passed "position"
+
+	Snake* GetNextSnake(const CellPosition & cx);
 
 	// ========= User Interface Functions =========
 
@@ -81,7 +90,8 @@ public:
 
 	// Overlapping tst
 
-	bool IsOverlapping(GameObject * newObj)const;
+	 bool IsOverlapping(GameObject * newObj)const;
+
 
 
 	~Grid(); // A destructor for any needed deallcations

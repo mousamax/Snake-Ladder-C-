@@ -1,6 +1,7 @@
 #include "CardFive.h"
 #include"Ladder.h"
 #include"Snake.h"
+
 CardFive::CardFive(const CellPosition & pos) : Card(pos) // set the cell position of the card
 {
 	cardNumber = 5; // set the inherited cardNumber data member with the card number (1 here)
@@ -33,7 +34,7 @@ void CardFive::Apply(Grid* pGrid, Player* pPlayer)
 	int justrolled=pPlayer->GetjustRolledDiceNum();
 
 	pPlayer->Move(pGrid,justrolled);
-	
+//	pGrid->UpdatePlayerCell();
 	// Checking if cell has ladder or snake  or not <<
 	// First check game object  >>>> Dynamic Casting ufing has ladder // has snake ...
 
@@ -45,6 +46,5 @@ void CardFive::Apply(Grid* pGrid, Player* pPlayer)
 		tst_2->Apply(pGrid,pPlayer);
 		}
 	}
-	
 	
 }
