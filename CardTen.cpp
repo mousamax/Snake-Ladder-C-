@@ -4,6 +4,7 @@
 	 :Card(pos)
 {
 	cardNumber=10;
+		 Isbought=false;
 }
 
 void CardTen::ReadCardParameters(Grid *pGrid)
