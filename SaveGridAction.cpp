@@ -1,12 +1,15 @@
 #include "SaveGridAction.h"
 
-SaveGridAction::SaveGridAction(ApplicationManager* pApp):Action(pApp),save("Grid.txt")
+
+SaveGridAction::SaveGridAction(ApplicationManager* pApp):Action(pApp)
 {
 	
 }
 
+
 void SaveGridAction::ReadActionParameters()
 {
+	save.open("Grid.txt", ios::out);
 	Grid* pGrid = pManager->GetGrid();
 	NofLadders = pGrid->numofladders();
 	NofSnakes = pGrid->numofSnakes();

@@ -28,6 +28,8 @@ CellPosition Cell::GetCellPosition() const
 	return position;
 }
 
+
+
 bool Cell::SetGameObject(GameObject * pGObj)
 {
 	if (pGameObject != NULL && pGObj!=NULL) // already contains one

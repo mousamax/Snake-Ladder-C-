@@ -31,7 +31,7 @@ public:
 	// Decide the parameters that you should pass to each function	
 	
 	virtual void Save(ofstream &OutFile,GOType Type) = 0;	// Saves the GameObject parameters to the file
-	//virtual void Load(ifstream &Infile,GOType Type) = 0;	// Loads and Reads the GameObject parameters from the file
+	virtual void Load(ifstream &Infile,GOType Type,CellPosition & start,CellPosition& end) = 0;	// Loads and Reads the GameObject parameters from the file
 
 	virtual ~GameObject(); // Virtual destructor
 };

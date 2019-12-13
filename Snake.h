@@ -19,7 +19,7 @@ public:
 
 	CellPosition GetEndPosition() const; // A getter for the endCellPos data member
 	virtual void Save(ofstream& OutFile, GOType Type);	// Saves the GameObject parameters to the file
-	virtual void Load(ifstream& Infile, GOType Type);
+	virtual void Load(ifstream& Infile, GOType Type, CellPosition& start, CellPosition& end);
 
 	virtual ~Snake(); // Virtual destructor
 };

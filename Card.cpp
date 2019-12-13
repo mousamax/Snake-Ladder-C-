@@ -51,8 +51,21 @@ void Card::Save(ofstream& OutFile, GOType Type)
 
 }
 
-void Card::Load(ifstream& Infile, GOType Type)
+void Card::Load(ifstream& Infile, GOType Type, CellPosition& start2, CellPosition& end2)
 {
+	if (Type == card)
+	{
+
+		int start, cardnum;
+		Infile >>cardnum >> start;
+		cardNumber = cardnum;
+		CellPosition temp(start);
+		end2.SetHCell(-1);
+		end2.SetVCell(-1);
+		start2.SetHCell(temp.HCell());
+		start2.SetVCell(temp.VCell());
+
+	}
 }
 
 Card::~Card()

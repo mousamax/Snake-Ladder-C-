@@ -25,7 +25,7 @@ public:
 	void set_roll(bool roll);
 	void SetCell(Cell * cell);		// A setter for the pCell
 	Cell* GetCell() const;			// A getter for the pCell
-
+	void Set_turncount(int count);
 	void SetWallet(int wallet);		// A setter for the wallet
 	int GetWallet() const;			// a getter for the wallet
 

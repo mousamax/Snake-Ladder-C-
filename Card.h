@@ -28,7 +28,7 @@ public:
 	                                                   // It is a virtual function (implementation depends on Card Type)
 
 	virtual void Save(ofstream& OutFile, GOType Type);	// Saves the GameObject parameters to the file
-	virtual void Load(ifstream& Infile, GOType Type);
+	virtual void Load(ifstream& Infile, GOType Type, CellPosition& start, CellPosition& end);
 	virtual ~Card(); // A Virtual Destructor
 };
 

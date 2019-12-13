@@ -54,8 +54,21 @@ void Snake::Save(ofstream& OutFile, GOType Type)
 	else { return; }
 }
 
-void Snake::Load(ifstream& Infile, GOType Type)
+void Snake::Load(ifstream& Infile, GOType Type, CellPosition& start2, CellPosition& end2)
 {
+	if (Type == snake)
+	{
+
+		int start, end;
+		Infile >> start >> end;
+		CellPosition temp(start);
+		CellPosition temp1(end);
+		end2.SetHCell(temp1.HCell());
+		end2.SetVCell(temp1.VCell());
+		start2.SetHCell(temp.HCell());
+		start2.SetVCell(temp.VCell());
+
+	}
 }
 
 Snake::~Snake()
