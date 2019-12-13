@@ -23,7 +23,7 @@ void NewGame::Execute()
 
 	// 1- Check if the Game is ended (Use the GetEndGame() function of pGrid), if yes, make the appropriate action
 	Grid* pGrid = pManager->GetGrid();
-
+        Output* pOut = pGrid->GetOutput();
 	if (pGrid->GetEndGame())
 	{
 	}
@@ -37,9 +37,17 @@ void NewGame::Execute()
 		{
 			Player* pPlayer = pGrid->GetCurrentPlayer();
 			// 4- Move the currentPlayer using function Move of class player
-			Cell cell(0, 8);
-			pPlayer->SetCell(&cell);
-			pPlayer->SetWallet(0);
+			
+			//pPlayer->ClearDrawing(pOut);
+
+			CellPosition cel(1);
+			pGrid->UpdatePlayerCell(pPlayer, cel);
+
+			//pPlayer->Draw(pOut);
+		 
+				
+			pPlayer->EndTurnCount();
+			pPlayer->SetWallet(100);
 			// 5- Advance the current player number of pGrid
 			pGrid->AdvanceCurrentPlayer();
 		}
