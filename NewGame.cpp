@@ -51,7 +51,7 @@ void NewGame::Execute()
 			// 5- Advance the current player number of pGrid
 			pGrid->AdvanceCurrentPlayer();
 		}
-		
+		pGrid->SetcurrPlayerNumber(0);  // you should add this setter in Grid class for variable currPlayerNumber ....
 		// NOTE: the above guidelines are the main ones but not a complete set (You may need to add more steps).
 	}
 }
