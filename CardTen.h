@@ -4,14 +4,20 @@
 
 class CardTen : public Card
 {
-	int CardPrice;
-	int Fees;
-	bool Isbought;
-	Player *pOwner;
+	static int CardPrice;
+	static int Fees;
+	static bool Isbought;
+	static Player *pOwner;
+	static bool IsInitialized;
+	 
+	 
 public:
 	CardTen(const CellPosition & pos);
 	void ReadCardParameters(Grid *pGrid);// 
-	void Apply(Grid *pGrid, Player *pPlayer); /*Has two parts
+	void Apply(Grid *pGrid, Player *pPlayer); 
+	static void Set_Isbought(bool);
+	
+												/*Has two parts
 												1-Checks if the card is bought or not
 												1.1-If it is not we should give the player the option to buy it or not
 												1.1.1- if the user choose yes we check his wallet and compare it to the cardprice

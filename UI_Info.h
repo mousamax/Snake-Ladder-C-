@@ -40,6 +40,12 @@ enum DESIGN_MODE_ITEMS // The items of the Design Mode (you should add more item
 
 	DESIGN_ITM_COUNT	// no. of items ==> This should be the last line in this enum
 };
+enum GOType
+{
+	ladder,
+	snake,
+	card,
+};
 
 enum PLAY_MODE_ITEMS // The items of the Play Mode (you should add more items)
 {
